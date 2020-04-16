@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
+# -*- coding: utf-8 -*-
 
 import tkinter
 from tkinter import MULTIPLE
@@ -12,21 +11,21 @@ from Data import Models_Data
 class App:
     def __init__(self,master):
         self.master = master
-        self.mylist=tkinter.Listbox(self.master,width=40,selectmode=MULTIPLE) #列表框
+        self.mylist=tkinter.Listbox(self.master,width=40,selectmode=MULTIPLE) 
         self.data = Models_Data()
-        self.one = self.data.get_Requirements() #初始列表值
-        self.two = ""  #二级页面
-        self.three="" #三级页面
+        self.one = self.data.get_Requirements() 
+        self.two = ""  # second panel
+        self.three=""  # third panel
         self.tree = ""
         self.result=[]
         self.state = 1
         self.initGui()
 
     def initGui(self):
-        # mylist=tkinter.Listbox(self.master,width=40,selectmode=MULTIPLE) #列表框
+        # mylist=tkinter.Listbox(self.master,width=40,selectmode=MULTIPLE) 
         self.mylist.pack()
-        for  item  in self.one: #插入内容
-            self.mylist.insert(tkinter.END,item) #从尾部插入
+        for  item  in self.one: #insert the content
+            self.mylist.insert(tkinter.END,item) 
 
         frameButton = Frame(self.master).pack(anchor='s')
         select=ttk.Button(frameButton, text='select', width=8,command=self.select_Button)
@@ -44,11 +43,11 @@ class App:
         else:
             return
         self.mylist.delete(0,self.mylist.size())
-        for item in forward_item: #插入内容
-            self.mylist.insert(tkinter.END,item) #从尾部插入
+        for item in forward_item: #insert the content
+            self.mylist.insert(tkinter.END,item) 
         self.state-=1
 
-    def treeviewClick(self,event):#双击
+    def treeviewClick(self,event):
         for item in self.tree.selection():
             item_text = self.tree.item(item,"values")
             temp = item_text[1]
@@ -69,8 +68,8 @@ class App:
         m_ids = []
         securityActivity.title("securityActivity")
         label = Label(securityActivity,text="")
-        tree = ttk.Treeview(securityActivity)      # #创建表格对象
-        tree["columns"] = ("id","securityActivity", "cost","maintenance","efficiency")     # #定义列
+        tree = ttk.Treeview(securityActivity)      # #creat table ob
+        tree["columns"] = ("id","securityActivity", "cost","maintenance","efficiency")     # define the column
         self.tree = tree
         self.label=label
         for n,i in enumerate(tree["columns"]):
@@ -91,7 +90,7 @@ class App:
 
 
     def select_Button(self):
-        selects = self.mylist.curselection()#获取选值
+        selects = self.mylist.curselection()#get the value
         tempList=[]
         for i in selects:
             if self.state==1:
@@ -115,8 +114,8 @@ class App:
         elif self.state==2:
             self.three = next_Data
 
-        for item in next_Data: #插入内容
-            self.mylist.insert(tkinter.END,item) #从尾部插入
+        for item in next_Data: #insert the content
+            self.mylist.insert(tkinter.END,item) 
         self.state+=1
 
 
@@ -144,8 +143,8 @@ class App:
     def submit_Button(self):
         res = tkinter.Tk()
         res.title("Final Choice")
-        tree = ttk.Treeview(res)      # #创建表格对象
-        tree["columns"] = ("requirement", "defense", "securityActivity", "cost","maintenance","efficiency")     # #定义列
+        tree = ttk.Treeview(res)      # #creat the table ob
+        tree["columns"] = ("requirement", "defense", "securityActivity", "cost","maintenance","efficiency")   #define the Column
         for n,i in enumerate(tree["columns"]):
             tree.column(i, width=100,anchor='center')
             tree.heading(i, text=i)
@@ -160,8 +159,8 @@ class App:
 
 
 if __name__ == '__main__':
-    win=tkinter.Tk() #构造窗体
+    win=tkinter.Tk() #creat the window
     win.title("Selection interface")
     App(win)
-    win.mainloop() #进入消息循环
+    win.mainloop() #enter the loop
 
